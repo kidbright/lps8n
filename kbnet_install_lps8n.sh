@@ -6,6 +6,7 @@ echo "==========================================="
 
 KBNET_DIR=/root/kbnet
 TMP_DIR=/tmp/kbnet_install
+MOSQUITTO_CONF=/etc/mosquitto/mosquitto.conf
 
 # create kbnet directory
 mkdir -p $KBNET_DIR
@@ -92,3 +93,23 @@ if [ $RES -eq 0 ]; then
 else
 	echo "error($RES)"
 fi
+
+# config mqtt firewall
+echo -ne "mqtt config... "
+run_cmd "uci show firewall | grep mqtt"
+if [ $RES -eq 0 ]; then
+	echo "configure... "
+	uci add firewall redirect
+	uci set firewall.@redirect[-1].name='mqtt'
+	uci set firewall.@redirect[-1].src='wan'
+	uci set firewall.@redirect[-1].src_dport='1883'
+	uci set firewall.@redirect[-1].dest_port='11883'
+	uci set firewall.@redirect[-1].proto='tcp'
+	uci set firewall.@redirect[-1].dest='lan'
+	uci set firewall.@redirect[-1].target='DNAT'
+	uci commit firewall
+fi
+echo "port 11883" >> $MOSQUITTO_CONF
+echo "max_connections 16" >> $MOSQUITTO_CONF
+echo "protocol mqtt" >> $MOSQUITTO_CONF
+echo "done"
