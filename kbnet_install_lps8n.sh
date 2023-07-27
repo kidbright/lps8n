@@ -44,7 +44,7 @@ echo -ne "kbnet_sub check... "
 run_cmd "pgrep kbnet_sub"
 RES=$?
 if [ $RES -eq 0 ]; then
-	echo "stop service"	
+	echo "stop service"
 	# stop kbnet_sub service
 	/etc/init.d/kbnet_sub stop
 	/etc/init.d/kbnet_sub disable
@@ -59,7 +59,7 @@ echo -ne "kbnet_fwd check... "
 run_cmd "pgrep kbnet_fwd"
 RES=$?
 if [ $RES -eq 0 ]; then
-	echo "stop service"	
+	echo "stop service"
 	# stop kbnet_fwd service
 	/etc/init.d/kbnet_fwd stop
 	/etc/init.d/kbnet_fwd disable
