@@ -86,6 +86,7 @@ RES=$?
 if [ $RES -eq 0 ]; then
 	# uninstall mosquitto-nossl
 	run_cmd "opkg remove mosquitto-nossl"
+	rm -f $MOSQUITTO_CONF
 fi
 run_cmd "opkg install mosquitto-nossl"
 RES=$?
