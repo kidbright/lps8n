@@ -35,20 +35,6 @@ if [ $RES -ne 0 ]; then
 fi
 echo "ok"
 
-# check curl
-echo -ne "curl check... "
-run_cmd "which curl"
-RES=$?
-if [ $RES -eq 0 ]; then
-	echo "found"
-else
-	echo "not found"
-	# install curl
-	echo -ne "curl install... "
-	run_cmd "opkg install curl"
-	echo "done"
-fi
-
 # check kbnet_sub service
 echo -ne "kbnet_sub check... "
 run_cmd "pgrep kbnet_sub"
