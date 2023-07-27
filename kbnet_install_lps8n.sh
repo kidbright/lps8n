@@ -1,5 +1,9 @@
 #!/bin/sh
 
+echo "======================================"
+echo "KidBright Net install script for lps8n"
+echo "======================================"
+
 KBNET_DIR=/root/kbnet
 
 # create kbnet directory
