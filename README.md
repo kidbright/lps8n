@@ -1,5 +1,8 @@
 # lps8n configuration
 
+### default http port forwarding
+- http port forwarding = 8000 (username=admin, password=dragino)
+
 ### turn off wifi
 - Network => WiFi => Enable WiFi Access Point = unchecked
 - Network => WiFi => Enable WiFi WAN Client = unchecked
@@ -27,6 +30,12 @@
 	- Broker Adderss [-h] = 127.0.0.1
 	- Broker Port [-p] = 11883
 	- click button "Save & Apply"
+
+### default ssh port forwarding
+- ssh port forwarding = 2222 (username=root, password=dragino)
+
+### ssh to lps8n
+ssh -p 2222 -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa root@<lps8n_wan_ip>
 
 ### run kbnet installation script
 wget --no-proxy --no-check-certificate -O - https://github.com/kidbright/lps8n/raw/main/kbnet_install_lps8n.sh | sh
