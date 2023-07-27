@@ -30,3 +30,6 @@
 
 ### run kbnet installation script
 wget --no-proxy --no-check-certificate -O - https://github.com/kidbright/lps8n/raw/main/kbnet_install_lps8n.sh | sh
+
+### reboot lps8n
+reboot

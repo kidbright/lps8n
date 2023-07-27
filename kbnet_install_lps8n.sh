@@ -109,7 +109,7 @@ if [ $RES -eq 0 ]; then
 	uci set firewall.@redirect[-1].target='DNAT'
 	uci commit firewall
 fi
-service firewall restart
+
 # config mosquitto
 echo "" >> $MOSQUITTO_CONF
 echo "port 11883" >> $MOSQUITTO_CONF
