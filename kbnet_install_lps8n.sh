@@ -36,6 +36,7 @@ echo -ne "download files... "
 cd $TMP_DIR
 wget -q https://github.com/kidbright/lps8n/raw/main/kbnet_install_lps8n_files.tgz
 tar xf kbnet_install_lps8n_files.tgz >/dev/null 2>&1
+echo "done"
 
 # opkg update
 echo -ne "opkg update... "
