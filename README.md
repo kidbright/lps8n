@@ -35,10 +35,16 @@
 - ssh port forwarding = 2222 (username=root, password=dragino)
 
 ### ssh to lps8n
+```
 ssh -p 2222 -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa root@<lps8n_wan_ip>
+```
 
 ### run kbnet installation script
+```
 wget --no-proxy --no-check-certificate -O - https://github.com/kidbright/lps8n/raw/main/kbnet_install_lps8n.sh | sh
+```
 
 ### reboot lps8n
+```
 reboot
+```
