@@ -73,6 +73,7 @@ fi
 echo -ne "kbnet install... "
 rm -rf $KBNET_DIR
 cp -r $TMP_DIR/kbnet_install_lps8n_files/kbnet /root
+echo "done"
 
 # opkg update
 echo -ne "opkg update... "
