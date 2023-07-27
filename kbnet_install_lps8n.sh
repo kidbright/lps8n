@@ -63,7 +63,7 @@ fi
 echo -ne "kbnet install... "
 rm -rf $KBNET_DIR
 mkdir -p $KBNET_DIR
-
+# check target cpu
 run_cmd "cat /proc/cpuinfo | grep -iq 'mips 24kc'"
 RES=$?
 if [ $RES -eq 0 ]; then
@@ -71,7 +71,7 @@ if [ $RES -eq 0 ]; then
 else
 	cp -r $TMP_DIR/kbnet_install_lps8n_files/kbnet-x64/* $KBNET_DIR/
 fi
-
+# copy initd files
 cp -r $TMP_DIR/kbnet_install_lps8n_files/etc /
 echo "done"
 
