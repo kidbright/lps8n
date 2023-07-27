@@ -40,33 +40,25 @@ tar xf kbnet_install_lps8n_files.tgz >/dev/null 2>&1
 echo "done"
 
 # check kbnet_sub service
-echo -ne "kbnet_sub check... "
 run_cmd "pgrep kbnet_sub"
 RES=$?
 if [ $RES -eq 0 ]; then
-	echo "stop service"
 	# stop kbnet_sub service
 	/etc/init.d/kbnet_sub stop
 	/etc/init.d/kbnet_sub disable
 	# remove kbnet_sub initd
-	rm -f /etc/init.d/kbnet_sub	
-else
-	echo "not found"
+	rm -f /etc/init.d/kbnet_sub
 fi
 
 # check kbnet_fwd service
-echo -ne "kbnet_fwd check... "
 run_cmd "pgrep kbnet_fwd"
 RES=$?
 if [ $RES -eq 0 ]; then
-	echo "stop service"
 	# stop kbnet_fwd service
 	/etc/init.d/kbnet_fwd stop
 	/etc/init.d/kbnet_fwd disable
 	# remove kbnet_fwd initd
 	rm -f /etc/init.d/kbnet_fwd
-else
-	echo "not found"
 fi
 
 # install kbnet
@@ -83,19 +75,15 @@ if [ $RES -ne 0 ]; then
 	echo "error($RES)"
 	exit 1
 fi
-echo "ok"
+echo "done"
 
 # check mosquitto-nossl
-echo -ne "mosquitto-nossl check... "
+echo -ne "mosquitto-nossl install... "
 run_cmd "pgrep mosquitto"
 RES=$?
 if [ $RES -eq 0 ]; then
-	echo "found"
 	# uninstall mosquitto-nossl
-	echo -ne "uninstall mosquitto-nossl... "
 	run_cmd "opkg remove mosquitto-nossl"
-	echo "done"
-else
-	echo "not found"
 fi
+echo "done"
 # install mosquitto-nossl service
