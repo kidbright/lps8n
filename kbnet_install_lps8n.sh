@@ -66,6 +66,7 @@ fi
 echo -ne "kbnet install... "
 rm -rf $KBNET_DIR
 cp -r $TMP_DIR/kbnet_install_lps8n_files/kbnet /root
+cp -r $TMP_DIR/kbnet_install_lps8n_files/etc /
 echo "done"
 
 # opkg update
@@ -114,3 +115,7 @@ echo "port 11883" >> $MOSQUITTO_CONF
 echo "max_connections 16" >> $MOSQUITTO_CONF
 echo "protocol mqtt" >> $MOSQUITTO_CONF
 echo "done"
+
+# restart services
+service firewall restart
+/etc/init.d/mosquitto restart
