@@ -8,11 +8,6 @@ KBNET_DIR=/root/kbnet
 TMP_DIR=/tmp/kbnet_install
 MOSQUITTO_CONF=/etc/mosquitto/mosquitto.conf
 
-# create kbnet directory
-mkdir -p $KBNET_DIR
-rm -rf $TMP_DIR
-mkdir -p $TMP_DIR
-
 # set default VERBOSE if not defined
 if [ "$VERBOSE" != "0" ] && [ "$VERBOSE" != "1" ]; then
 	VERBOSE=0
@@ -35,6 +30,8 @@ echo "ok"
 
 # download files
 echo -ne "download files... "
+rm -rf $TMP_DIR
+mkdir -p $TMP_DIR
 cd $TMP_DIR
 wget -q https://github.com/kidbright/lps8n/raw/main/kbnet_install_lps8n_files.tgz
 tar xf kbnet_install_lps8n_files.tgz >/dev/null 2>&1
@@ -65,7 +62,16 @@ fi
 # install kbnet
 echo -ne "kbnet install... "
 rm -rf $KBNET_DIR
-cp -r $TMP_DIR/kbnet_install_lps8n_files/kbnet /root
+mkdir -p $KBNET_DIR
+
+run_cmd "cat /proc/cpuinfo | grep -iq 'mips 24kc'"
+RES=$?
+if [ $RES -eq 0 ]; then
+	cp -r $TMP_DIR/kbnet_install_lps8n_files/kbnet/* $KBNET_DIR/
+else
+	cp -r $TMP_DIR/kbnet_install_lps8n_files/kbnet-x64/* $KBNET_DIR/
+fi
+
 cp -r $TMP_DIR/kbnet_install_lps8n_files/etc /
 echo "done"
 
