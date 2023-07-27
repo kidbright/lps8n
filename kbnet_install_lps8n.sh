@@ -99,7 +99,7 @@ fi
 echo -ne "mqtt config... "
 run_cmd "uci show firewall | grep mqtt"
 if [ $RES -eq 0 ]; then
-	echo "configure... "
+	echo -ne "configure... "
 	uci add firewall redirect >/dev/null
 	uci set firewall.@redirect[-1].name='mqtt'
 	uci set firewall.@redirect[-1].src='wan'
@@ -110,12 +110,15 @@ if [ $RES -eq 0 ]; then
 	uci set firewall.@redirect[-1].target='DNAT'
 	uci commit firewall
 fi
+service firewall restart
+# config mosquitto
 echo "" >> $MOSQUITTO_CONF
 echo "port 11883" >> $MOSQUITTO_CONF
 echo "max_connections 16" >> $MOSQUITTO_CONF
 echo "protocol mqtt" >> $MOSQUITTO_CONF
+/etc/init.d/mosquitto restart
 echo "done"
 
-# restart services
-service firewall restart
-/etc/init.d/mosquitto restart
+
+
+
