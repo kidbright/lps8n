@@ -120,6 +120,10 @@ echo "protocol mqtt" >> $MOSQUITTO_CONF
 /etc/init.d/mosquitto restart
 echo "done"
 
-
-
-
+# start kbnet services
+echo -ne "start kbnet services... "
+/etc/init.d/kbnet_sub enable
+/etc/init.d/kbnet_fwd enable
+/etc/init.d/kbnet_sub start
+/etc/init.d/kbnet_fwd start
+echo "done"
