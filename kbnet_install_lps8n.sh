@@ -126,7 +126,3 @@ echo -ne "start kbnet services... "
 /etc/init.d/kbnet_sub start
 /etc/init.d/kbnet_fwd start
 echo "done"
-
-
-
-
