@@ -1,13 +1,15 @@
 #!/bin/sh
 
-echo "======================================"
-echo "KidBright Net install script for lps8n"
-echo "======================================"
+echo "==========================================="
+echo "KidBright Net installation script for lps8n"
+echo "==========================================="
 
 KBNET_DIR=/root/kbnet
+TMP_DIR=/tmp/kbnet_install
 
 # create kbnet directory
 mkdir -p $KBNET_DIR
+mkdir -p $TMP_DIR
 
 # set default VERBOSE if not defined
 if [ "$VERBOSE" != "0" ] && [ "$VERBOSE" != "1" ]; then
@@ -28,6 +30,12 @@ if [ $RES -ne 0 ]; then
 	exit 1
 fi
 echo "ok"
+
+# download files
+echo -ne "download files... "
+cd $TMP_DIR
+wget -q https://github.com/kidbright/lps8n/raw/main/kbnet_install_lps8n_files.tgz
+tar xf kbnet_install_lps8n_files.tgz >/dev/null 2>&1
 
 # opkg update
 echo -ne "opkg update... "
