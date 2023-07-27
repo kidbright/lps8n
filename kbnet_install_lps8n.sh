@@ -10,6 +10,7 @@ TMP_DIR=/tmp/kbnet_install
 
 # create kbnet directory
 mkdir -p $KBNET_DIR
+rm -rf $TMP_DIR
 mkdir -p $TMP_DIR
 
 # set default VERBOSE if not defined
