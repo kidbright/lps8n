@@ -63,14 +63,7 @@ fi
 echo -ne "kbnet install... "
 rm -rf $KBNET_DIR
 mkdir -p $KBNET_DIR
-# check target cpu
-run_cmd "cat /proc/cpuinfo | grep -iq 'mips 24kc'"
-RES=$?
-if [ $RES -eq 0 ]; then
-	cp -r $TMP_DIR/kbnet_install_lps8n_files/kbnet/* $KBNET_DIR/
-else
-	cp -r $TMP_DIR/kbnet_install_lps8n_files/kbnet-x64/* $KBNET_DIR/
-fi
+cp -r $TMP_DIR/kbnet_install_lps8n_files/kbnet/* $KBNET_DIR/
 # copy initd files
 cp -r $TMP_DIR/kbnet_install_lps8n_files/etc /
 echo "done"
@@ -94,7 +87,7 @@ if [ $RES -eq 0 ]; then
 	run_cmd "opkg remove mosquitto-nossl"
 	rm -f $MOSQUITTO_CONF
 fi
-run_cmd "opkg install mosquitto-nossl"
+run_cmd "opkg install libmosquitto-ssl mosquitto-nossl mosquitto-client-ssl"
 RES=$?
 if [ $RES -eq 0 ]; then
 	echo "done"
@@ -133,3 +126,7 @@ echo -ne "start kbnet services... "
 /etc/init.d/kbnet_sub start
 /etc/init.d/kbnet_fwd start
 echo "done"
+
+
+
+
