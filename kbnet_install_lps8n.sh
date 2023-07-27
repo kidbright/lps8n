@@ -39,6 +39,41 @@ wget -q https://github.com/kidbright/lps8n/raw/main/kbnet_install_lps8n_files.tg
 tar xf kbnet_install_lps8n_files.tgz >/dev/null 2>&1
 echo "done"
 
+# check kbnet_sub service
+echo -ne "kbnet_sub check... "
+run_cmd "pgrep kbnet_sub"
+RES=$?
+if [ $RES -eq 0 ]; then
+	echo "stop service"	
+	# stop kbnet_sub service
+	/etc/init.d/kbnet_sub stop
+	/etc/init.d/kbnet_sub disable
+	# remove kbnet_sub initd
+	rm -f /etc/init.d/kbnet_sub	
+else
+	echo "not found"
+fi
+
+# check kbnet_fwd service
+echo -ne "kbnet_fwd check... "
+run_cmd "pgrep kbnet_fwd"
+RES=$?
+if [ $RES -eq 0 ]; then
+	echo "stop service"	
+	# stop kbnet_fwd service
+	/etc/init.d/kbnet_fwd stop
+	/etc/init.d/kbnet_fwd disable
+	# remove kbnet_fwd initd
+	rm -f /etc/init.d/kbnet_fwd
+else
+	echo "not found"
+fi
+
+# install kbnet
+echo -ne "kbnet install... "
+rm -rf $KBNET_DIR
+cp -r $TMP_DIR/kbnet_install_lps8n_files/kbnet /root
+
 # opkg update
 echo -ne "opkg update... "
 run_cmd "opkg update"
@@ -48,48 +83,6 @@ if [ $RES -ne 0 ]; then
 	exit 1
 fi
 echo "ok"
-
-# check kbnet_sub service
-echo -ne "kbnet_sub check... "
-run_cmd "pgrep kbnet_sub"
-RES=$?
-if [ $RES -eq 0 ]; then
-	echo "found"
-	# uninstall kbnet_sub
-	echo -ne "uninstall kbnet_sub... "
-	# stop kbnet_sub service
-	/etc/init.d/kbnet_sub stop
-	/etc/init.d/kbnet_sub disable
-	# remove kbnet_sub initd
-	rm -f /etc/init.d/kbnet_sub
-	# uninstall kbnet_sub service
-	rm -f $KBNET_DIR/kbnet_sub
-	echo "done"
-else
-	echo "not found"
-fi
-# install kbnet_sub service
-
-# check kbnet_fwd service
-echo -ne "kbnet_fwd check... "
-run_cmd "pgrep kbnet_fwd"
-RES=$?
-if [ $RES -eq 0 ]; then
-	echo "found"
-	# uninstall kbnet_fwd
-	echo -ne "uninstall kbnet_fwd... "
-	# stop kbnet_fwd service
-	/etc/init.d/kbnet_fwd stop
-	/etc/init.d/kbnet_fwd disable
-	# remove kbnet_fwd initd
-	rm -f /etc/init.d/kbnet_fwd
-	# uninstall kbnet_fwd service
-	rm -f $KBNET_DIR/kbnet_fwd
-	echo "done"
-else
-	echo "not found"
-fi
-# install kbnet_fwd service
 
 # check mosquitto-nossl
 echo -ne "mosquitto-nossl check... "
