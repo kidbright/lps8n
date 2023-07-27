@@ -99,7 +99,6 @@ fi
 echo -ne "mqtt config... "
 run_cmd "uci show firewall | grep mqtt"
 if [ $RES -eq 0 ]; then
-	echo -ne "configure... "
 	uci add firewall redirect >/dev/null
 	uci set firewall.@redirect[-1].name='mqtt'
 	uci set firewall.@redirect[-1].src='wan'
