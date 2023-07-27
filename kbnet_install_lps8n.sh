@@ -77,7 +77,7 @@ if [ $RES -ne 0 ]; then
 fi
 echo "done"
 
-# check mosquitto-nossl
+# install mosquitto-nossl
 echo -ne "mosquitto-nossl install... "
 run_cmd "pgrep mosquitto"
 RES=$?
@@ -85,5 +85,10 @@ if [ $RES -eq 0 ]; then
 	# uninstall mosquitto-nossl
 	run_cmd "opkg remove mosquitto-nossl"
 fi
-echo "done"
-# install mosquitto-nossl service
+run_cmd "opkg install mosquitto-nossl"
+RES=$?
+if [ $RES -eq 0 ]; then
+	echo "done"
+else
+	echo "error($RES)"
+fi
