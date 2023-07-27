@@ -1,6 +1,5 @@
 #!/bin/sh
 
-sleep 1
 echo "==========================================="
 echo "KidBright Net installation script for lps8n"
 echo "==========================================="
