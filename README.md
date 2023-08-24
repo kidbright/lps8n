@@ -7,7 +7,7 @@
 - Network => WiFi => Enable WiFi Access Point = unchecked
 - Network => WiFi => Enable WiFi WAN Client = unchecked
 
-### delete abp device
+### delete factory abp device
 - LoRa => ABP Decryption
 	- Delete Key => Select Dev ADDR
     - click button "DELETE"
@@ -17,7 +17,7 @@
 	- check => Enable ABP Decryption
     - click button "SAVE"
 
-### add device abp device
+### add new abp device
 - LoRa => ABP Decryption
 	- Dev ADDR = last 4-byte of mac address
 	- APP Session Key = 16-byte key
@@ -30,6 +30,12 @@
 	- Broker Adderss [-h] = 127.0.0.1
 	- Broker Port [-p] = 11883
 	- click button "Save & Apply"
+
+### add mqtt channel
+- MQTT => Channels
+	- Local ID = Dev ADDR
+	- Remote ID = Dev ADDR
+	- click ADD_CHAN
 
 ### default ssh port forwarding
 - ssh port forwarding = 2222 (username=root, password=dragino)
@@ -47,4 +53,9 @@ wget --no-proxy --no-check-certificate -O - https://github.com/kidbright/lps8n/r
 ### reboot lps8n
 ```
 reboot
+```
+
+### kbnet logs
+```
+logread -f | grep kbnet
 ```
